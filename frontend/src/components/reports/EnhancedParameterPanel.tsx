@@ -332,6 +332,27 @@ export default function EnhancedParameterPanel({
     const controlType = ctrl?.controlType || guessControlType(p)
     const options = dynamicOptions[p.name] || (p.config?.options as string[] | undefined) || []
 
+    if (controlType === 'CHECKBOX') {
+      // A flag: the box and its label on one line; the value is "true" or "false", and the controls whose
+      // options query names the flag reload their options when it changes, like for any other parameter
+      return (
+        <div key={p.name} className={compact ? 'w-full' : 'flex-1 min-w-[180px] max-w-[300px]'}>
+          <label className="inline-flex items-start gap-2 text-xs font-medium text-slate-600 dark:text-slate-400 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={values[p.name] === 'true'}
+              onChange={e => handleChange(p.name, e.target.checked ? 'true' : 'false')}
+              className="h-3.5 w-3.5 mt-px"
+            />
+            <span>
+              {p.label || p.name}
+              {p.isRequired && <span className="text-red-500 ml-0.5">*</span>}
+            </span>
+          </label>
+        </div>
+      )
+    }
+
     return (
       <div key={p.name} className={compact ? 'w-full' : 'flex-1 min-w-[180px] max-w-[300px]'}>
         <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
@@ -711,7 +732,8 @@ function SearchableChecklist({ selected, options, onToggle, onSelect }: {
 function guessControlType(p: ReportParameter): string {
   if (p.paramType === 'SELECT') return 'DROPDOWN'
   if (p.paramType === 'MULTI_SELECT') return 'MULTI_CHECKBOX'
-  if (p.paramType === 'BOOLEAN') return 'RADIO'
+  // A BOOLEAN parameter without a control is a flag; a RADIO without options showed nothing
+  if (p.paramType === 'BOOLEAN') return 'CHECKBOX'
   if (p.paramType === 'DATE' || p.paramType === 'DATE_RANGE') return 'DATE_PICKER'
   return 'INPUT'
 }

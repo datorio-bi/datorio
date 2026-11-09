@@ -111,22 +111,55 @@ function pickStopColor(value: number, stops: ColorStop[], mode: 'step' | 'gradie
   return undefined
 }
 
+// Text over a fill set by the report: the theme text colour is light in dark mode and fades on the light
+// fills usual for conditional colours, so the text takes whichever of a dark and a light colour contrasts
+// more with the fill (WCAG contrast ratio). A colour that is not #rgb or #rrggbb keeps the theme text.
+const DARK_FILL_TEXT = '#1e293b'
+const LIGHT_FILL_TEXT = '#f8fafc'
+
+function relativeLuminance([r, g, b]: [number, number, number]): number {
+  const channel = (v: number) => {
+    const c = v / 255
+    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4
+  }
+  return 0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b)
+}
+
+function readableTextOn(fill: string | undefined): string | undefined {
+  const rgb = fill ? hexToRgb(fill) : null
+  const dark = hexToRgb(DARK_FILL_TEXT)
+  const light = hexToRgb(LIGHT_FILL_TEXT)
+  if (!rgb || !dark || !light) return undefined
+  const l = relativeLuminance(rgb)
+  const contrast = (other: [number, number, number]) => {
+    const o = relativeLuminance(other)
+    return (Math.max(l, o) + 0.05) / (Math.min(l, o) + 0.05)
+  }
+  return contrast(dark) >= contrast(light) ? DARK_FILL_TEXT : LIGHT_FILL_TEXT
+}
+
 function renderCellStyle(
   fmt: ColumnFormatter | undefined,
   rawValue: unknown,
   colMax: number | undefined,
   baseBg: string | undefined,
+  rowBg?: string,
 ): CSSProperties | undefined {
   const style: CSSProperties = {}
   if (baseBg) style.backgroundColor = baseBg
+  const fillText = readableTextOn(baseBg ?? rowBg)
+  if (fillText) style.color = fillText
   if (fmt?.type === 'heatmap') {
     const num = Number(rawValue)
     if (Number.isFinite(num)) {
       const mode = fmt.colorMode === 'step' ? 'step' : 'gradient'
       const color = pickStopColor(num, fmt.colorStops, mode)
       if (color) {
-        if (fmt.background) style.backgroundColor = color
-        else style.color = color
+        if (fmt.background) {
+          style.backgroundColor = color
+          const heatText = readableTextOn(color)
+          if (heatText) style.color = heatText
+        } else style.color = color
       }
     }
   }
@@ -438,6 +471,7 @@ export default function TableWidget({ data, title, chartConfig, onRowClick, clic
               //   "rowColorMode": "row" | "cell"   (default: "row")
               // When rowColorMode === "cell", only the cell in the rowColorBy
               // column gets the background; the rest of the row stays neutral.
+              // The text over either fill takes a contrasting colour (readableTextOn).
               const rowColorBy = typeof config.rowColorBy === 'string' ? config.rowColorBy : undefined
               const rowColors = (config.rowColors as Record<string, string> | undefined) || undefined
               const rowColorMode = config.rowColorMode === 'cell' ? 'cell' : 'row'
@@ -464,7 +498,7 @@ export default function TableWidget({ data, title, chartConfig, onRowClick, clic
                     return (
                       <td
                         key={col}
-                        style={renderCellStyle(fmt, rawValue, columnMax[col], baseBg)}
+                        style={renderCellStyle(fmt, rawValue, columnMax[col], baseBg, rowBg)}
                         className={`${cellPad} whitespace-nowrap text-slate-700 dark:text-slate-300${numberFormats[col] ? ' text-end tabular-nums' : ''}`}
                       >
                         {renderCellContent(fmt, rawValue, numberFormats[col])}
