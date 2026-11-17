@@ -13,11 +13,13 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import org.springframework.transaction.PlatformTransactionManager
 import org.springframework.transaction.support.TransactionTemplate
+import java.util.concurrent.ConcurrentHashMap
 
 /**
  * Starts the job of a RUN_JOB button (an Airflow DAG) with the report parameters as its run
  * configuration, and reports the progress of a run. The job id and the parameter list are read from
- * the saved widget, not from the request, and the job must be listed in datorio.airflow.allowed-dags.
+ * the saved widget, not from the request. The job must be listed in datorio.airflow.allowed-dags or,
+ * when datorio.airflow.allowed-dag-tag is set, its DAG must carry that tag in Airflow.
  *
  * Button settings (widget chartConfig): jobId, jobParams (report parameters to send, all when
  * empty), jobUserParam (receives the user name), jobEmailParam (receives the user's email when empty).
@@ -30,9 +32,13 @@ class JobRunService(
     private val auditService: AuditService,
     private val objectMapper: ObjectMapper,
     @Value("\${datorio.airflow.allowed-dags:}") allowedDags: String,
+    @Value("\${datorio.airflow.allowed-dag-tag:}") allowedDagTag: String,
     txManager: PlatformTransactionManager
 ) {
     private val allowed = allowedDags.split(',').map { it.trim() }.filter { it.isNotEmpty() }.toSet()
+    private val allowedTag = allowedDagTag.trim()
+    // DAG id -> time (ms) until which its successful tag check is trusted, so the progress polling does not ask Airflow each time.
+    private val taggedUntil = ConcurrentHashMap<String, Long>()
     private val readTx = TransactionTemplate(txManager).apply { isReadOnly = true }
 
     private data class PreparedRun(val jobId: String, val conf: Map<String, Any?>)
@@ -40,6 +46,7 @@ class JobRunService(
     fun runJob(reportId: Long, widgetId: Long, values: Map<String, Any?>, username: String): RunJobResponse {
         // Read the widget and the report parameters first, call Airflow outside the transaction.
         val prepared = readTx.execute { prepare(reportId, widgetId, values, username) }!!
+        ensureAllowed(prepared.jobId)
         val run = airflowClient.triggerDagRun(prepared.jobId, prepared.conf, "Datorio: $username, report $reportId")
         auditService.log(
             username = username,
@@ -55,7 +62,20 @@ class JobRunService(
     fun getJobStatus(reportId: Long, widgetId: Long, runId: String): JobStatusResponse {
         require(runId.isNotBlank()) { "Run id is empty" }
         val jobId = readTx.execute { resolveJob(reportId, widgetId).first }!!
+        ensureAllowed(jobId)
         return toStatus(jobId, airflowClient.getDagRunStatus(jobId, runId))
+    }
+
+    /** Called outside the transaction, since the tag check asks Airflow. Only a successful tag check is remembered. */
+    private fun ensureAllowed(jobId: String) {
+        if (jobId in allowed) return
+        require(allowedTag.isNotEmpty()) { "Job $jobId is not allowed: add it to datorio.airflow.allowed-dags" }
+        val now = System.currentTimeMillis()
+        if ((taggedUntil[jobId] ?: 0L) > now) return
+        require(allowedTag in airflowClient.getDagTags(jobId)) {
+            "Job $jobId is not allowed: give the DAG the tag $allowedTag or add it to datorio.airflow.allowed-dags"
+        }
+        taggedUntil[jobId] = now + TAG_CHECK_TTL_MS
     }
 
     private fun prepare(reportId: Long, widgetId: Long, values: Map<String, Any?>, username: String): PreparedRun {
@@ -75,7 +95,7 @@ class JobRunService(
         return PreparedRun(jobId, conf)
     }
 
-    /** Job id and settings of a RUN_JOB button of the report; refuses other widgets and jobs out of the list. */
+    /** Job id and settings of a RUN_JOB button of the report; refuses other widgets. */
     private fun resolveJob(reportId: Long, widgetId: Long): Pair<String, Map<String, Any?>> {
         val widget = widgetRepo.findById(widgetId).orElseThrow { NoSuchElementException("Widget $widgetId not found") }
         val report = widget.report ?: throw NoSuchElementException("Widget $widgetId has no report")
@@ -86,7 +106,6 @@ class JobRunService(
         require(cfg["buttonType"] == "RUN_JOB") { "Button $widgetId does not start a job" }
         val jobId = cfg["jobId"]?.toString()?.trim().orEmpty()
         require(jobId.isNotEmpty()) { "Button $widgetId has no job id" }
-        require(jobId in allowed) { "Job $jobId is not allowed: add it to datorio.airflow.allowed-dags" }
         return jobId to cfg
     }
 
@@ -98,6 +117,7 @@ class JobRunService(
     }.filter { it.isNotEmpty() }
 
     companion object {
+        private const val TAG_CHECK_TTL_MS = 60_000L
         private val DONE_TASK_STATES = setOf("success", "failed", "skipped", "upstream_failed", "removed")
         private val FAILED_TASK_STATES = setOf("failed", "upstream_failed")
         private val ACTIVE_TASK_STATES = setOf(

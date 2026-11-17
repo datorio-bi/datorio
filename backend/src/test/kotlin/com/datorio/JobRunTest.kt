@@ -167,6 +167,35 @@ class JobRunTest {
         fun `not configured client refuses`() {
             assertFalse(AirflowClient("", "", "", 5).isConfigured())
             assertThrows<IllegalStateException> { AirflowClient("", "", "", 5).triggerDagRun("build_x", emptyMap()) }
+            assertThrows<IllegalStateException> { AirflowClient("", "", "", 5).getDagTags("build_x") }
+        }
+
+        @Test
+        fun `reads the tag names of a DAG`() {
+            val paths = CopyOnWriteArrayList<String>()
+            val s = HttpServer.create(InetSocketAddress("127.0.0.1", 0), 0)
+            s.createContext("/auth/token") { ex ->
+                val out = """{"access_token": "t1"}""".toByteArray()
+                ex.sendResponseHeaders(201, out.size.toLong())
+                ex.responseBody.use { it.write(out) }
+            }
+            s.createContext("/api/v2/dags/") { ex ->
+                paths.add(ex.requestURI.rawPath)
+                val known = ex.requestURI.rawPath == "/api/v2/dags/build_x"
+                val out = (if (known) {
+                    """{"dag_id": "build_x", "tags": [{"name": "job_tag", "dag_id": "build_x"}, {"name": "manual", "dag_id": "build_x"}]}"""
+                } else {
+                    """{"detail": "The DAG with dag_id: `nope` was not found"}"""
+                }).toByteArray()
+                ex.sendResponseHeaders(if (known) 200 else 404, out.size.toLong())
+                ex.responseBody.use { it.write(out) }
+            }
+            s.start()
+            server = s
+            val client = AirflowClient("http://127.0.0.1:${s.address.port}", "svc", "secret", 5)
+            assertEquals(setOf("job_tag", "manual"), client.getDagTags("build_x"))
+            assertThrows<NoSuchElementException> { client.getDagTags("nope") }
+            assertEquals(listOf("/api/v2/dags/build_x", "/api/v2/dags/nope"), paths.toList())
         }
 
         @Test
@@ -256,8 +285,12 @@ class JobRunTest {
             on { getTransaction(anyOrNull()) } doReturn SimpleTransactionStatus()
         }
 
-        private fun service(allowed: String = "build_x") =
-            JobRunService(widgetRepo, userRepo, client, audit, mapper, allowed, txManager)
+        private fun service(allowed: String = "build_x", tag: String = "") =
+            JobRunService(widgetRepo, userRepo, client, audit, mapper, allowed, tag, txManager)
+
+        private fun knownUser() = whenever(userRepo.findByUsername("ivanov")).thenReturn(
+            Optional.of(User(username = "ivanov", email = "ivanov@example.ru", passwordHash = "x"))
+        )
 
         private fun widget(config: String, type: WidgetType = WidgetType.BUTTON, reportId: Long = 5): ReportWidget {
             val report = Report(id = reportId, name = "r")
@@ -299,13 +332,48 @@ class JobRunTest {
             assertThrows<IllegalArgumentException> { service().runJob(5, 7, emptyMap(), "ivanov") }
 
             whenever(widgetRepo.findById(7)).thenReturn(Optional.of(widget(runJob)))
+            knownUser()
             assertThrows<IllegalArgumentException> { service(allowed = "other_dag").runJob(5, 7, emptyMap(), "ivanov") }
             assertThrows<IllegalArgumentException> { service(allowed = "other_dag").getJobStatus(5, 7, "manual__1") }
 
             whenever(widgetRepo.findById(7)).thenReturn(Optional.of(widget("""{"buttonType": "URL"}""")))
             assertThrows<IllegalArgumentException> { service().getJobStatus(5, 7, "manual__1") }
 
+            // Without the tag setting the list alone decides, Airflow is not asked.
             verifyNoInteractions(client)
+        }
+
+        @Test
+        fun `starts a DAG that is not listed but has the tag and asks for the tags once within a minute`() {
+            whenever(widgetRepo.findById(7)).thenReturn(Optional.of(widget(runJob)))
+            knownUser()
+            whenever(client.getDagTags("build_x")).thenReturn(setOf("manual", "job_tag"))
+            whenever(client.triggerDagRun(any(), any(), anyOrNull())).thenReturn(DagRunInfo("manual__1", "queued"))
+            whenever(client.getDagRunStatus("build_x", "manual__1")).thenReturn(
+                DagRunStatus("manual__1", "running", null, null, null, emptyList())
+            )
+
+            val svc = service(allowed = "", tag = " job_tag ")
+            assertEquals("manual__1", svc.runJob(5, 7, mapOf("campaign_code" to "CB1"), "ivanov").runId)
+            assertEquals("running", svc.getJobStatus(5, 7, "manual__1").state)
+
+            verify(client, times(1)).getDagTags("build_x")
+            verify(client).triggerDagRun(eq("build_x"), any(), anyOrNull())
+        }
+
+        @Test
+        fun `refuses a DAG that is neither listed nor tagged`() {
+            whenever(widgetRepo.findById(7)).thenReturn(Optional.of(widget(runJob)))
+            knownUser()
+            whenever(client.getDagTags("build_x")).thenReturn(setOf("manual"))
+
+            val svc = service(allowed = "other_dag", tag = "job_tag")
+            val e = assertThrows<IllegalArgumentException> { svc.runJob(5, 7, emptyMap(), "ivanov") }
+            assertTrue(e.message!!.contains("job_tag"))
+            // A refusal is not remembered: the tag may be added to the DAG in the meantime.
+            assertThrows<IllegalArgumentException> { svc.getJobStatus(5, 7, "manual__1") }
+            verify(client, times(2)).getDagTags("build_x")
+            verify(client, never()).triggerDagRun(any(), any(), anyOrNull())
         }
     }
 }

@@ -39,7 +39,8 @@ data class DagRunStatus(
 /**
  * Minimal client of the Airflow 3 REST API used by the RUN_JOB buttons: gets a JWT from
  * POST /auth/token with a service account and triggers DAG runs with
- * POST /api/v2/dags/{dagId}/dagRuns. The token is kept until Airflow answers 401.
+ * POST /api/v2/dags/{dagId}/dagRuns. The token is kept until Airflow answers 401. The tags of a DAG
+ * (GET /api/v2/dags/{dagId}) decide whether a DAG that is not in the allowed list may run.
  *
  * Settings: datorio.airflow.base-url (for example http://host:5080), username, password,
  * timeout-seconds. Without base-url and username the client reports that it is not configured.
@@ -93,6 +94,19 @@ class AirflowClient(
             throw IllegalArgumentException("Airflow refused the run of $dagId ($status): $detail")
         }
         throw IllegalStateException("Airflow error $status on the run of $dagId: $detail")
+    }
+
+    /** Tag names of a DAG; Airflow 3 returns the tags as objects with a "name" field. */
+    fun getDagTags(dagId: String): Set<String> {
+        check(isConfigured()) { "Airflow connection is not configured: set datorio.airflow.base-url, username and password" }
+        val dag = getJson("/api/v2/dags/" + URLEncoder.encode(dagId, StandardCharsets.UTF_8), "the DAG $dagId")
+        return (dag["tags"] as? List<*>).orEmpty().mapNotNull { tag ->
+            when (tag) {
+                null -> null
+                is Map<*, *> -> tag["name"]?.toString()
+                else -> tag.toString()
+            }
+        }.toSet()
     }
 
     /** State of a DAG run and of its task instances (GET dagRuns/{run_id} and .../taskInstances). */
