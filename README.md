@@ -137,13 +137,14 @@ AIRFLOW_API_URL=http://airflow-apiserver:8080   # Airflow 3 API server
 AIRFLOW_API_USER=datorio_service
 AIRFLOW_API_PASSWORD=change_me
 AIRFLOW_ALLOWED_DAGS=example_dag_id,another_dag_id
+AIRFLOW_ALLOWED_DAG_TAG=datorio_button           # optional: DAGs with this tag may be started too
 ```
 
 Then add a **Button** widget to a report, choose the **Start a job** type and fill in its fields (the widget config key is in brackets):
 
 | Designer field | Meaning |
 |----------------|---------|
-| Job (Airflow DAG id) (`jobId`) | the DAG to start; it must be listed in `AIRFLOW_ALLOWED_DAGS` |
+| Job (Airflow DAG id) (`jobId`) | the DAG to start; it must be listed in `AIRFLOW_ALLOWED_DAGS` or carry the tag `AIRFLOW_ALLOWED_DAG_TAG` |
 | Report parameters to send (`jobParams`) | the parameters passed to the DAG; all of them when none is chosen |
 | Job parameter for the user name (`jobUserParam`) | receives the name of the user who pressed the button |
 | Job parameter for the user email (`jobEmailParam`) | receives the user's email when the report leaves it empty |

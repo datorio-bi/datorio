@@ -92,6 +92,7 @@ datorio:
     username: ${AIRFLOW_API_USER:}
     password: ${AIRFLOW_API_PASSWORD:}
     allowed-dags: ${AIRFLOW_ALLOWED_DAGS:}     # comma-separated DAG ids the buttons may start
+    allowed-dag-tag: ${AIRFLOW_ALLOWED_DAG_TAG:}  # DAGs with this Airflow tag may be started too, empty = off
     timeout-seconds: 30
 
   # ── Saved exports (lost with the container unless a volume is mounted there) ──

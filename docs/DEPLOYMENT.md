@@ -47,6 +47,7 @@ services:
       AIRFLOW_API_USER: ${AIRFLOW_API_USER}
       AIRFLOW_API_PASSWORD: ${AIRFLOW_API_PASSWORD}
       AIRFLOW_ALLOWED_DAGS: ${AIRFLOW_ALLOWED_DAGS}
+      AIRFLOW_ALLOWED_DAG_TAG: ${AIRFLOW_ALLOWED_DAG_TAG}
     depends_on:
       datorio-postgres:
         condition: service_healthy
@@ -82,6 +83,7 @@ AIRFLOW_API_URL=http://airflow-host:5080
 AIRFLOW_API_USER=bi_service_user
 AIRFLOW_API_PASSWORD=your_airflow_password
 AIRFLOW_ALLOWED_DAGS=example_dag_id
+AIRFLOW_ALLOWED_DAG_TAG=
 ```
 
 `AIRFLOW_*` configure the RUN_JOB report buttons, which start an Airflow DAG with the
@@ -96,6 +98,13 @@ and its `taskInstances`):
   is enough; a custom role needs `DAG Runs: create, read` and `Task Instances: read`).
 - `AIRFLOW_ALLOWED_DAGS` - comma-separated DAG ids that the buttons may start; a button with
   any other DAG id is refused before Airflow is called.
+- `AIRFLOW_ALLOWED_DAG_TAG` - optional; a DAG that is not in the list may also be started when it
+  has this tag in Airflow (for example `tags=["datorio_button"]` in the DAG file; use a tag reserved
+  for this purpose, not one that groups DAGs by topic). Datorio reads the tags with
+  `GET /api/v2/dags/{dag_id}`, so the service account also needs `DAGs: read` (the `User` role has
+  it), and remembers a successful check for a minute. A new DAG with the tag needs no change of Datorio;
+  whoever can deploy DAGs to Airflow decides which of them the buttons may start. Empty (the
+  default) turns the tag check off.
 
 The values are read at startup: after changing them, recreate the container
 (`docker compose -f docker-compose.prod.yml up -d`, or rerun the CI deploy job).
@@ -367,6 +376,7 @@ if result["status"] == "error":
 | `AIRFLOW_API_URL` | Airflow 3 API server for the Start a job buttons; empty disables the buttons | empty |
 | `AIRFLOW_API_USER`, `AIRFLOW_API_PASSWORD` | Airflow service account | empty |
 | `AIRFLOW_ALLOWED_DAGS` | Comma-separated DAG ids the buttons may start | empty |
+| `AIRFLOW_ALLOWED_DAG_TAG` | DAGs with this Airflow tag may be started too; empty turns the tag check off | empty |
 | `DATASOURCE_ENCRYPTION_KEY` | Key for the data source passwords stored in the metadata database; `JWT_SECRET` when empty. Changing it means entering the passwords again | empty |
 | `REGISTRATION_ENABLED` | `true` lets anyone create a VIEWER account through `POST /api/auth/register` | `false` |
 | `QUERY_TIMEOUT_SECONDS` | A widget or console query running longer is cancelled | `120` |
