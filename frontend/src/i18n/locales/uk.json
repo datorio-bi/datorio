@@ -897,6 +897,8 @@
   "interactive.button.export_failed": "Експорт не вдався",
   "interactive.button.default_label": "Кнопка",
   "interactive.button.run_job_confirm": "Запустити із застосованими значеннями параметрів?",
+  "interactive.button.run_job_apply_first": "Натисніть \"{{apply}}\": на панелі є незастосовані зміни",
+  "interactive.button.run_job_apply_again": "Щоб виконати ще раз, змініть значення на панелі й натисніть \"{{apply}}\"",
   "interactive.button.run_job_started": "Завдання поставлено в чергу: {{runId}}",
   "interactive.button.run_job_failed": "Завдання не запущено",
   "interactive.button.run_job_unavailable": "Запуск завдання доступний лише на сторінці звіту",

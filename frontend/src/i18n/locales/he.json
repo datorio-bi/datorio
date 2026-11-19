@@ -892,6 +892,8 @@
   "interactive.button.export_failed": "הייצוא נכשל",
   "interactive.button.default_label": "כפתור",
   "interactive.button.run_job_confirm": "להפעיל עם ערכי הפרמטרים שהוחלו?",
+  "interactive.button.run_job_apply_first": "לחצו על \"{{apply}}\": בחלונית יש שינויים שלא הוחלו",
+  "interactive.button.run_job_apply_again": "כדי להפעיל שוב, שנו את הערכים בחלונית ולחצו על \"{{apply}}\"",
   "interactive.button.run_job_started": "המשימה נכנסה לתור: {{runId}}",
   "interactive.button.run_job_failed": "המשימה לא הופעלה",
   "interactive.button.run_job_unavailable": "ניתן להפעיל את המשימה רק מדף הדוח",

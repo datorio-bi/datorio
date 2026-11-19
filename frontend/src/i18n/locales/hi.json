@@ -888,6 +888,8 @@
   "interactive.button.export_failed": "निर्यात विफल",
   "interactive.button.default_label": "बटन",
   "interactive.button.run_job_confirm": "लागू किए गए पैरामीटर मानों के साथ शुरू करें?",
+  "interactive.button.run_job_apply_first": "\"{{apply}}\" दबाएँ: पैनल में ऐसे बदलाव हैं जो लागू नहीं किए गए हैं",
+  "interactive.button.run_job_apply_again": "फिर से चलाने के लिए पैनल में मान बदलें और \"{{apply}}\" दबाएँ",
   "interactive.button.run_job_started": "जॉब कतार में है: {{runId}}",
   "interactive.button.run_job_failed": "जॉब शुरू नहीं हुआ",
   "interactive.button.run_job_unavailable": "जॉब केवल रिपोर्ट पेज से शुरू किया जा सकता है",

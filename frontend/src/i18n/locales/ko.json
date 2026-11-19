@@ -887,6 +887,8 @@
   "interactive.button.export_failed": "내보내기에 실패했습니다",
   "interactive.button.default_label": "버튼",
   "interactive.button.run_job_confirm": "적용된 매개변수 값으로 실행할까요?",
+  "interactive.button.run_job_apply_first": "\"{{apply}}\"을(를) 누르세요: 패널에 적용되지 않은 변경 사항이 있습니다",
+  "interactive.button.run_job_apply_again": "다시 실행하려면 패널의 값을 변경하고 \"{{apply}}\"을(를) 누르세요",
   "interactive.button.run_job_started": "작업이 대기열에 추가되었습니다: {{runId}}",
   "interactive.button.run_job_failed": "작업이 시작되지 않았습니다",
   "interactive.button.run_job_unavailable": "작업은 보고서 페이지에서만 실행할 수 있습니다",

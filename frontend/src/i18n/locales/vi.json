@@ -887,6 +887,8 @@
   "interactive.button.export_failed": "Xuất thất bại",
   "interactive.button.default_label": "Nút",
   "interactive.button.run_job_confirm": "Chạy với các giá trị tham số đã áp dụng?",
+  "interactive.button.run_job_apply_first": "Nhấn \"{{apply}}\": bảng có thay đổi chưa được áp dụng",
+  "interactive.button.run_job_apply_again": "Để chạy lại, hãy thay đổi giá trị trên bảng và nhấn \"{{apply}}\"",
   "interactive.button.run_job_started": "Tác vụ đã vào hàng đợi: {{runId}}",
   "interactive.button.run_job_failed": "Không thể chạy tác vụ",
   "interactive.button.run_job_unavailable": "Chỉ có thể chạy tác vụ trên trang báo cáo",

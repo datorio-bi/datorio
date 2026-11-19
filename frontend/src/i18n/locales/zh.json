@@ -887,6 +887,8 @@
   "interactive.button.export_failed": "导出失败",
   "interactive.button.default_label": "按钮",
   "interactive.button.run_job_confirm": "确定使用已应用的参数值运行？",
+  "interactive.button.run_job_apply_first": "请点击\"{{apply}}\"：面板中有未应用的更改",
+  "interactive.button.run_job_apply_again": "如需再次运行，请更改面板中的值并点击\"{{apply}}\"",
   "interactive.button.run_job_started": "任务已加入队列：{{runId}}",
   "interactive.button.run_job_failed": "任务未启动",
   "interactive.button.run_job_unavailable": "只能在报表页面运行任务",

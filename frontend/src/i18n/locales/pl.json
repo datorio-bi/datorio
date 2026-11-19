@@ -896,6 +896,8 @@
   "interactive.button.export_failed": "Eksport nie powiódł się",
   "interactive.button.default_label": "Przycisk",
   "interactive.button.run_job_confirm": "Uruchomić z zastosowanymi wartościami parametrów?",
+  "interactive.button.run_job_apply_first": "Kliknij \"{{apply}}\": panel zawiera niezastosowane zmiany",
+  "interactive.button.run_job_apply_again": "Aby uruchomić ponownie, zmień wartości w panelu i kliknij \"{{apply}}\"",
   "interactive.button.run_job_started": "Zadanie w kolejce: {{runId}}",
   "interactive.button.run_job_failed": "Zadanie nie zostało uruchomione",
   "interactive.button.run_job_unavailable": "Zadanie można uruchomić tylko na stronie raportu",

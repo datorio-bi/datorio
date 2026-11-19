@@ -890,6 +890,8 @@
   "interactive.button.export_failed": "Export fehlgeschlagen",
   "interactive.button.default_label": "Schaltfläche",
   "interactive.button.run_job_confirm": "Mit den angewendeten Parameterwerten starten?",
+  "interactive.button.run_job_apply_first": "Klicken Sie auf \"{{apply}}\": Das Bedienfeld enthält nicht angewendete Änderungen",
+  "interactive.button.run_job_apply_again": "Um erneut zu starten, ändern Sie die Werte im Bedienfeld und klicken Sie auf \"{{apply}}\"",
   "interactive.button.run_job_started": "Job in der Warteschlange: {{runId}}",
   "interactive.button.run_job_failed": "Der Job wurde nicht gestartet",
   "interactive.button.run_job_unavailable": "Der Job kann nur auf der Berichtsseite gestartet werden",

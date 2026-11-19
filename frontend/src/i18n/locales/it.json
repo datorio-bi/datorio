@@ -891,6 +891,8 @@
   "interactive.button.export_failed": "Esportazione non riuscita",
   "interactive.button.default_label": "Pulsante",
   "interactive.button.run_job_confirm": "Avviare con i valori dei parametri applicati?",
+  "interactive.button.run_job_apply_first": "Premi \"{{apply}}\": il pannello contiene modifiche non applicate",
+  "interactive.button.run_job_apply_again": "Per eseguire di nuovo, modifica i valori del pannello e premi \"{{apply}}\"",
   "interactive.button.run_job_started": "Job in coda: {{runId}}",
   "interactive.button.run_job_failed": "Il job non è stato avviato",
   "interactive.button.run_job_unavailable": "Il job può essere avviato solo dalla pagina del report",

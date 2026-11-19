@@ -76,6 +76,19 @@ export default function ButtonWidget({
 
   const jobActive = !!job && !job.status?.finished && job.pollErrors < MAX_POLL_ERRORS
 
+  // The button sends the applied values: while the panel holds changed values that are not applied (another
+  // action, say), they would go out as the old ones, so it waits for "Apply"; after a run it waits for values
+  // applied again, so the same run is not started twice by mistake
+  const applyClicks = useJobRunStore(s => s.applyClicks[reportId] ?? 0)
+  const runApplyClicks = useJobRunStore(s => s.runApplyClicks[jobKey])
+  const hasPanel = useJobRunStore(s => (s.panels[reportId] ?? 0) > 0)
+  const panelDirty = useJobRunStore(s => s.dirty[reportId] ?? false)
+  const isJob = config.buttonType === 'RUN_JOB' && hasPanel
+  const reason = blockedReason
+    || (isJob && panelDirty ? t('interactive.button.run_job_apply_first', { apply: t('common.apply') }) : undefined)
+    || (isJob && runApplyClicks === applyClicks
+      ? t('interactive.button.run_job_apply_again', { apply: t('common.apply') }) : undefined)
+
   // Applying other parameter values (a new object of applied values) starts over: the line of a finished or
   // lost run is taken away, as when the report was opened; a running job keeps its line.
   const paramsRef = useRef(reportParams)
@@ -129,6 +142,7 @@ export default function ButtonWidget({
     setStarting(true)
     controlsApi.runJob(reportId, widgetId, reportParams || {})
       .then(res => {
+        useJobRunStore.getState().markRunStarted(jobKey, reportId)
         toast.success(t('interactive.button.run_job_started', { runId: res.runId }), { duration: 8000 })
         setNow(Date.now())
         setJob({ runId: res.runId, startedAt: Date.now(), pollErrors: 0 })
@@ -138,7 +152,7 @@ export default function ButtonWidget({
   }
 
   const handleClick = () => {
-    if (blockedReason) return
+    if (reason) return
     const btnType = config.buttonType || 'SHOW_HIDE'
     if (btnType === 'SHOW_HIDE') setToggled(v => !v)
     switch (btnType) {
@@ -232,8 +246,8 @@ export default function ButtonWidget({
     <div className="h-full flex flex-col items-center justify-center gap-1.5">
       <button
         onClick={handleClick}
-        disabled={busy || !!blockedReason}
-        title={blockedReason}
+        disabled={busy || !!reason}
+        title={reason}
         className={clsx(
           'inline-flex items-center gap-2 rounded-lg font-medium transition-all',
           'shadow-sm hover:shadow-md active:scale-[0.98] disabled:opacity-60',
@@ -245,8 +259,8 @@ export default function ButtonWidget({
         <Icon className={clsx('w-4 h-4', busy && 'animate-spin')} />
         {toggled && config.labelActive ? config.labelActive : (config.label || t('interactive.button.default_label'))}
       </button>
-      {blockedReason && !busy && (
-        <p className="max-w-xs px-2 text-center text-[11px] leading-tight text-amber-600 dark:text-amber-400">{blockedReason}</p>
+      {reason && !busy && (
+        <p className="max-w-xs px-2 text-center text-[11px] leading-tight text-amber-600 dark:text-amber-400">{reason}</p>
       )}
       {progress && (
         <div className="w-full max-w-xs px-2">

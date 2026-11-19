@@ -887,6 +887,8 @@
   "interactive.button.export_failed": "Az export sikertelen",
   "interactive.button.default_label": "Gomb",
   "interactive.button.run_job_confirm": "Indítás az alkalmazott paraméterértékekkel?",
+  "interactive.button.run_job_apply_first": "Kattintson a(z) \"{{apply}}\" gombra: a panelen nem alkalmazott módosítások vannak",
+  "interactive.button.run_job_apply_again": "Az újbóli futtatáshoz módosítsa a panel értékeit, és kattintson a(z) \"{{apply}}\" gombra",
   "interactive.button.run_job_started": "A feladat várólistára került: {{runId}}",
   "interactive.button.run_job_failed": "A feladat nem indult el",
   "interactive.button.run_job_unavailable": "A feladat csak a jelentés oldaláról indítható",

@@ -892,6 +892,8 @@
   "interactive.button.export_failed": "Exporteren mislukt",
   "interactive.button.default_label": "Knop",
   "interactive.button.run_job_confirm": "Starten met de toegepaste parameterwaarden?",
+  "interactive.button.run_job_apply_first": "Klik op \"{{apply}}\": het paneel bevat wijzigingen die niet zijn toegepast",
+  "interactive.button.run_job_apply_again": "Wijzig de waarden in het paneel en klik op \"{{apply}}\" om opnieuw uit te voeren",
   "interactive.button.run_job_started": "Taak in de wachtrij: {{runId}}",
   "interactive.button.run_job_failed": "De taak is niet gestart",
   "interactive.button.run_job_unavailable": "De taak kan alleen vanaf de rapportpagina worden gestart",

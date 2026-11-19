@@ -30,6 +30,7 @@ import type { ContainerItem } from '@/api/visualization'
 import TabContainer from '@/components/interactive/TabContainer'
 import ErrorBoundary from '@/components/common/ErrorBoundary'
 import { useAuthStore } from '@/store/authStore'
+import { useJobRunStore } from '@/store/useJobRunStore'
 import { parseJson } from '@/utils/safeJson'
 
 type FilterPanelPosition = 'top' | 'bottom' | 'left' | 'right'
@@ -263,8 +264,10 @@ export default function ReportViewerPage() {
       const value = row[m.column]
       if (value !== undefined && value !== null && value !== '') overrides[m.param] = String(value)
     }
-    if (Object.keys(overrides).length > 0) handleRender({ ...currentParams, ...overrides })
-  }, [currentParams, handleRender])
+    if (Object.keys(overrides).length === 0) return
+    useJobRunStore.getState().markApplied(report?.id || 0)  // values chosen by the person, as with "Apply"
+    handleRender({ ...currentParams, ...overrides })
+  }, [currentParams, handleRender, report?.id])
 
   useAutoRefresh(() => handleRender(), autoRefresh)
 
@@ -354,9 +357,10 @@ export default function ReportViewerPage() {
     const nextParams = { ...currentParams }
     if (value == null || value === '') delete nextParams[field]
     else nextParams[field] = value
+    useJobRunStore.getState().markApplied(report?.id || 0)
     setCurrentParams(nextParams)
     await renderWithParams(nextParams)
-  }, [currentParams, renderWithParams])
+  }, [currentParams, renderWithParams, report?.id])
 
   // ── Visibility rules of a widget: all active rules must pass ───────────────────
   const userRoles = useAuthStore(s => s.user?.roles ?? [])
@@ -714,7 +718,8 @@ export default function ReportViewerPage() {
             }}
             onWidgetDisplay={handleWidgetDisplay}
             reportParams={currentParams}
-            onJobFinished={() => { handleRender() }}
+            // Like "Refresh": the job may have added values that the panel lists offer (a new campaign, say)
+            onJobFinished={() => { setFilterRefreshKey(k => k + 1); handleRender() }}
             buttonBlockedReason={buttonBlockedReason(w)}
             loading={rendering}
           />
@@ -745,6 +750,7 @@ export default function ReportViewerPage() {
               currentParameters={currentParams}
               className={bookmarkOffsetClass}
               onApplyBookmark={(params) => {
+                useJobRunStore.getState().markApplied(report?.id || 0)
                 setCurrentParams(params)
                 handleRender(params)
               }}

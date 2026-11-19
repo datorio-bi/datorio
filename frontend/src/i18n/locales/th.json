@@ -887,6 +887,8 @@
   "interactive.button.export_failed": "ส่งออกไม่สำเร็จ",
   "interactive.button.default_label": "ปุ่ม",
   "interactive.button.run_job_confirm": "เริ่มด้วยค่าพารามิเตอร์ที่นำไปใช้แล้วหรือไม่",
+  "interactive.button.run_job_apply_first": "กด \"{{apply}}\": แผงมีการเปลี่ยนแปลงที่ยังไม่ได้นำไปใช้",
+  "interactive.button.run_job_apply_again": "หากต้องการเรียกใช้อีกครั้ง ให้เปลี่ยนค่าในแผงแล้วกด \"{{apply}}\"",
   "interactive.button.run_job_started": "งานเข้าคิวแล้ว: {{runId}}",
   "interactive.button.run_job_failed": "เริ่มงานไม่สำเร็จ",
   "interactive.button.run_job_unavailable": "เริ่มงานได้เฉพาะในหน้ารายงานเท่านั้น",
