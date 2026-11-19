@@ -892,6 +892,8 @@
   "interactive.button.export_failed": "Eksport mislyktes",
   "interactive.button.default_label": "Knapp",
   "interactive.button.run_job_confirm": "Starte med de anvendte parameterverdiene?",
+  "interactive.button.run_job_apply_first": "Trykk på \"{{apply}}\": panelet har endringer som ikke er tatt i bruk",
+  "interactive.button.run_job_apply_again": "For å kjøre på nytt, endre verdiene i panelet og trykk på \"{{apply}}\"",
   "interactive.button.run_job_started": "Jobben står i kø: {{runId}}",
   "interactive.button.run_job_failed": "Jobben ble ikke startet",
   "interactive.button.run_job_unavailable": "Jobben kan bare startes fra rapportsiden",

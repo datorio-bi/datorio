@@ -887,6 +887,8 @@
   "interactive.button.export_failed": "Ekspor gagal",
   "interactive.button.default_label": "Tombol",
   "interactive.button.run_job_confirm": "Jalankan dengan nilai parameter yang sudah diterapkan?",
+  "interactive.button.run_job_apply_first": "Tekan \"{{apply}}\": panel memiliki perubahan yang belum diterapkan",
+  "interactive.button.run_job_apply_again": "Untuk menjalankan lagi, ubah nilai di panel dan tekan \"{{apply}}\"",
   "interactive.button.run_job_started": "Tugas masuk antrean: {{runId}}",
   "interactive.button.run_job_failed": "Gagal menjalankan tugas",
   "interactive.button.run_job_unavailable": "Tugas hanya dapat dijalankan dari halaman laporan",

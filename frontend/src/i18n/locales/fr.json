@@ -892,6 +892,8 @@
   "interactive.button.export_failed": "Échec de l'exportation",
   "interactive.button.default_label": "Bouton",
   "interactive.button.run_job_confirm": "Lancer avec les valeurs de paramètres appliquées ?",
+  "interactive.button.run_job_apply_first": "Cliquez sur \"{{apply}}\" : le panneau contient des modifications non appliquées",
+  "interactive.button.run_job_apply_again": "Pour relancer, modifiez les valeurs du panneau et cliquez sur \"{{apply}}\"",
   "interactive.button.run_job_started": "Tâche en file d'attente : {{runId}}",
   "interactive.button.run_job_failed": "La tâche n'a pas été lancée",
   "interactive.button.run_job_unavailable": "La tâche ne peut être lancée que depuis la page du rapport",

@@ -887,6 +887,8 @@
   "interactive.button.export_failed": "エクスポートに失敗しました",
   "interactive.button.default_label": "ボタン",
   "interactive.button.run_job_confirm": "適用済みのパラメータ値で実行しますか？",
+  "interactive.button.run_job_apply_first": "「{{apply}}」を押してください: パネルに未適用の変更があります",
+  "interactive.button.run_job_apply_again": "再実行するには、パネルの値を変更して「{{apply}}」を押してください",
   "interactive.button.run_job_started": "ジョブをキューに追加しました：{{runId}}",
   "interactive.button.run_job_failed": "ジョブを開始できませんでした",
   "interactive.button.run_job_unavailable": "ジョブはレポートページからのみ実行できます",

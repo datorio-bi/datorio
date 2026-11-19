@@ -887,6 +887,8 @@
   "interactive.button.export_failed": "فشل التصدير",
   "interactive.button.default_label": "زر",
   "interactive.button.run_job_confirm": "هل تريد التشغيل بقيم المعاملات المطبقة؟",
+  "interactive.button.run_job_apply_first": "اضغط \"{{apply}}\": في اللوحة تغييرات لم تُطبَّق",
+  "interactive.button.run_job_apply_again": "للتشغيل مرة أخرى، غيّر القيم في اللوحة واضغط \"{{apply}}\"",
   "interactive.button.run_job_started": "تمت إضافة المهمة إلى قائمة الانتظار: {{runId}}",
   "interactive.button.run_job_failed": "لم يتم تشغيل المهمة",
   "interactive.button.run_job_unavailable": "لا يمكن تشغيل المهمة إلا من صفحة التقرير",

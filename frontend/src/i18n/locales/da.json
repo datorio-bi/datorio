@@ -892,6 +892,8 @@
   "interactive.button.export_failed": "Eksport mislykkedes",
   "interactive.button.default_label": "Knap",
   "interactive.button.run_job_confirm": "Start med de anvendte parameterværdier?",
+  "interactive.button.run_job_apply_first": "Klik på \"{{apply}}\": panelet har ændringer, der ikke er anvendt",
+  "interactive.button.run_job_apply_again": "For at køre igen skal du ændre værdierne i panelet og klikke på \"{{apply}}\"",
   "interactive.button.run_job_started": "Jobbet er i kø: {{runId}}",
   "interactive.button.run_job_failed": "Jobbet blev ikke startet",
   "interactive.button.run_job_unavailable": "Jobbet kan kun startes fra rapportsiden",

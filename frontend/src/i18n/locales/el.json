@@ -891,6 +891,8 @@
   "interactive.button.export_failed": "Η εξαγωγή απέτυχε",
   "interactive.button.default_label": "Κουμπί",
   "interactive.button.run_job_confirm": "Εκκίνηση με τις εφαρμοσμένες τιμές παραμέτρων;",
+  "interactive.button.run_job_apply_first": "Πατήστε \"{{apply}}\": ο πίνακας έχει αλλαγές που δεν έχουν εφαρμοστεί",
+  "interactive.button.run_job_apply_again": "Για να εκτελέσετε ξανά, αλλάξτε τις τιμές στον πίνακα και πατήστε \"{{apply}}\"",
   "interactive.button.run_job_started": "Η εργασία μπήκε σε ουρά: {{runId}}",
   "interactive.button.run_job_failed": "Η εργασία δεν ξεκίνησε",
   "interactive.button.run_job_unavailable": "Η εργασία μπορεί να ξεκινήσει μόνο από τη σελίδα της αναφοράς",

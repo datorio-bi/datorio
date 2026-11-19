@@ -897,6 +897,8 @@
   "interactive.button.export_failed": "Exportul a eșuat",
   "interactive.button.default_label": "Buton",
   "interactive.button.run_job_confirm": "Porniți cu valorile aplicate ale parametrilor?",
+  "interactive.button.run_job_apply_first": "Apăsați \"{{apply}}\": panoul are modificări neaplicate",
+  "interactive.button.run_job_apply_again": "Pentru a rula din nou, modificați valorile din panou și apăsați \"{{apply}}\"",
   "interactive.button.run_job_started": "Job pus în coadă: {{runId}}",
   "interactive.button.run_job_failed": "Jobul nu a fost pornit",
   "interactive.button.run_job_unavailable": "Jobul poate fi pornit doar din pagina raportului",

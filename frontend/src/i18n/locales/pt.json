@@ -892,6 +892,8 @@
   "interactive.button.export_failed": "Falha na exportação",
   "interactive.button.default_label": "Botão",
   "interactive.button.run_job_confirm": "Iniciar com os valores de parâmetros aplicados?",
+  "interactive.button.run_job_apply_first": "Clique em \"{{apply}}\": o painel tem alterações não aplicadas",
+  "interactive.button.run_job_apply_again": "Para executar novamente, altere os valores do painel e clique em \"{{apply}}\"",
   "interactive.button.run_job_started": "Tarefa na fila: {{runId}}",
   "interactive.button.run_job_failed": "A tarefa não foi iniciada",
   "interactive.button.run_job_unavailable": "A tarefa só pode ser iniciada na página do relatório",

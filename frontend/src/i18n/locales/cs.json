@@ -893,6 +893,8 @@
   "interactive.button.export_failed": "Export se nezdařil",
   "interactive.button.default_label": "Tlačítko",
   "interactive.button.run_job_confirm": "Spustit s použitými hodnotami parametrů?",
+  "interactive.button.run_job_apply_first": "Klikněte na \"{{apply}}\": na panelu jsou nepoužité změny",
+  "interactive.button.run_job_apply_again": "Pro další spuštění změňte hodnoty na panelu a klikněte na \"{{apply}}\"",
   "interactive.button.run_job_started": "Úloha je ve frontě: {{runId}}",
   "interactive.button.run_job_failed": "Úloha nebyla spuštěna",
   "interactive.button.run_job_unavailable": "Úlohu lze spustit jen na stránce sestavy",

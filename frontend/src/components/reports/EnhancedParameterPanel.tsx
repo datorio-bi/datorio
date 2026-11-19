@@ -7,6 +7,7 @@ import { Play, ChevronDown, ChevronRight } from 'lucide-react'
 import clsx from 'clsx'
 import { log } from '@/utils/logger'
 import { groupParameters } from '@/utils/paramConfig'
+import { useJobRunStore } from '@/store/useJobRunStore'
 
 interface Props {
   reportId: number
@@ -99,6 +100,25 @@ export default function EnhancedParameterPanel({
       .catch(() => {})
   }, [reportId, refreshKey])
 
+  // Values changed by the person since the last "Apply" (a change put back counts too): only then "Apply" is
+  // offered, and a job button of the report waits for it, since it sends the applied values
+  const [dirty, setDirty] = useState(false)
+
+  // A job button of the report waits for "Apply" only while a panel with parameters is shown
+  const hasParameters = parameters.length > 0
+  useEffect(() => {
+    if (!hasParameters) return
+    const { addPanel } = useJobRunStore.getState()
+    addPanel(reportId, 1)
+    return () => addPanel(reportId, -1)
+  }, [reportId, hasParameters])
+
+  useEffect(() => {
+    const { setDirty: publish } = useJobRunStore.getState()
+    publish(reportId, hasParameters && dirty)
+    return () => publish(reportId, false)
+  }, [reportId, hasParameters, dirty])
+
   // Load dynamic options for a single parameter. Returns the loaded options
   // so callers can decide whether to auto-select (e.g. for required params).
   const loadOptions = useCallback(async (paramName: string, parentValues: Record<string, string> = {}): Promise<string[]> => {
@@ -160,6 +180,7 @@ export default function EnhancedParameterPanel({
       }
     })
     setValues(init)
+    setDirty(false)  // other parameters (another tab): the panel shows the applied values again
   }, [paramKey]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Values applied outside the panel (a table row click) replace the shown ones.
@@ -265,6 +286,7 @@ export default function EnhancedParameterPanel({
   // Keep the current value of dependent params; only clear it if the new options no longer include it.
   const handleChange = (paramName: string, value: string) => {
     log.filter('handleChange', { paramName, value })
+    setDirty(true)
     // Track last non-empty selection
     if (value) lastKnownRef.current[paramName] = value
 
@@ -321,7 +343,10 @@ export default function EnhancedParameterPanel({
   const missingRequired = parameters.filter(p => p.isRequired && !(values[p.name] || '').trim())
 
   const handleApply = () => {
-    if (missingRequired.length > 0) return
+    if (missingRequired.length > 0 || !dirty) return
+    // The auto-fill cascade applies values too, but is not counted: a job button waits for the person
+    useJobRunStore.getState().markApplied(reportId)
+    setDirty(false)
     onApply(toTyped(values))
   }
 
@@ -468,7 +493,7 @@ export default function EnhancedParameterPanel({
 
         <button
           onClick={handleApply}
-          disabled={loading || missingRequired.length > 0}
+          disabled={loading || missingRequired.length > 0 || !dirty}
           className={`btn-primary h-[38px] ${compact ? 'w-full justify-center' : ''}`}
         >
           <Play className="w-4 h-4" />

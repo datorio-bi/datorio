@@ -19,6 +19,7 @@ Put a **Start a job** button on a report, and business users can start an Apache
 - the name of the user who pressed the button, and their email, can be passed to the DAG as well;
 - a progress bar under the button shows the current task, the completed steps and the elapsed time, names the task that failed, and the report refreshes when the run is over;
 - the button can stay unavailable until the required parameters are applied or until a given table shows rows, with the reason shown under it;
+- the button sends the applied values, so it waits while the parameter panel has changes that are not applied (**Apply** is available only then), and after a run it waits until values are applied again (on the panel, by a table row click, a bookmark or a filter button), so the same run is not started twice by mistake;
 - only DAGs from an allow-list can be started; Datorio talks to the Airflow 3 REST API with a service account.
 
 ![The example report Airflow job example: a run in progress under the Start the job button, earlier runs in Job runs and the result of the last run](docs/images/airflow-job.png)

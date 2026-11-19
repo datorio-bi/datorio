@@ -864,6 +864,8 @@
   "interactive.button_style": "Стиль",
   "interactive.button.default_label": "Кнопка",
   "interactive.button.run_job_confirm": "Запустить с применёнными значениями параметров?",
+  "interactive.button.run_job_apply_first": "Нажмите \"{{apply}}\": на панели есть неприменённые изменения",
+  "interactive.button.run_job_apply_again": "Чтобы выполнить ещё раз, измените значения на панели и нажмите \"{{apply}}\"",
   "interactive.button.run_job_started": "Задание поставлено в очередь: {{runId}}",
   "interactive.button.run_job_failed": "Задание не запущено",
   "interactive.button.run_job_unavailable": "Запуск задания доступен только на странице отчёта",

@@ -892,6 +892,8 @@
   "interactive.button.export_failed": "Error al exportar",
   "interactive.button.default_label": "Botón",
   "interactive.button.run_job_confirm": "¿Iniciar con los valores de parámetros aplicados?",
+  "interactive.button.run_job_apply_first": "Pulse \"{{apply}}\": el panel tiene cambios sin aplicar",
+  "interactive.button.run_job_apply_again": "Para ejecutar de nuevo, cambie los valores del panel y pulse \"{{apply}}\"",
   "interactive.button.run_job_started": "Tarea en cola: {{runId}}",
   "interactive.button.run_job_failed": "La tarea no se ha iniciado",
   "interactive.button.run_job_unavailable": "La tarea solo se puede iniciar desde la página del informe",

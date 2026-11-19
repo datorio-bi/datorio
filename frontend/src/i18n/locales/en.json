@@ -973,6 +973,8 @@
   "interactive.button.export_failed": "Export failed",
   "interactive.button.default_label": "Button",
   "interactive.button.run_job_confirm": "Start with the applied parameter values?",
+  "interactive.button.run_job_apply_first": "Press \"{{apply}}\": the panel has changes that are not applied",
+  "interactive.button.run_job_apply_again": "To run again, change the values on the panel and press \"{{apply}}\"",
   "interactive.button.run_job_started": "Job queued: {{runId}}",
   "interactive.button.run_job_failed": "The job was not started",
   "interactive.button.run_job_unavailable": "The job can be started only on the report page",

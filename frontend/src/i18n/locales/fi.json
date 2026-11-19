@@ -892,6 +892,8 @@
   "interactive.button.export_failed": "Vienti epäonnistui",
   "interactive.button.default_label": "Painike",
   "interactive.button.run_job_confirm": "Käynnistetäänkö käytössä olevilla parametriarvoilla?",
+  "interactive.button.run_job_apply_first": "Valitse \"{{apply}}\": paneelissa on muutoksia, joita ei ole otettu käyttöön",
+  "interactive.button.run_job_apply_again": "Suorita uudelleen muuttamalla paneelin arvoja ja valitsemalla \"{{apply}}\"",
   "interactive.button.run_job_started": "Työ on jonossa: {{runId}}",
   "interactive.button.run_job_failed": "Työtä ei käynnistetty",
   "interactive.button.run_job_unavailable": "Työn voi käynnistää vain raportin sivulta",

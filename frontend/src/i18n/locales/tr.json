@@ -887,6 +887,8 @@
   "interactive.button.export_failed": "Dışa aktarma başarısız",
   "interactive.button.default_label": "Düğme",
   "interactive.button.run_job_confirm": "Uygulanan parametre değerleriyle başlatılsın mı?",
+  "interactive.button.run_job_apply_first": "\"{{apply}}\" düğmesine basın: panelde uygulanmamış değişiklikler var",
+  "interactive.button.run_job_apply_again": "Yeniden çalıştırmak için paneldeki değerleri değiştirip \"{{apply}}\" düğmesine basın",
   "interactive.button.run_job_started": "İş kuyruğa alındı: {{runId}}",
   "interactive.button.run_job_failed": "İş başlatılmadı",
   "interactive.button.run_job_unavailable": "İş yalnızca rapor sayfasından başlatılabilir",
