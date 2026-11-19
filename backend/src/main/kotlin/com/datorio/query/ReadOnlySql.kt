@@ -17,10 +17,30 @@ object ReadOnlySql {
         require(ALLOWED_STARTS.any { first.startsWith(it) }) {
             "Only SELECT queries are allowed. Use the database admin tools for DDL/DML operations."
         }
-        require(!body.trimEnd().removeSuffix(";").contains(';')) {
+        // A backslash escapes a quote in ClickHouse and not in PostgreSQL, so both readings must find one statement
+        require(!hasSecondStatement(body, backslashEscapes = true) && !hasSecondStatement(body, backslashEscapes = false)) {
             "Only one statement is allowed in a query"
         }
         return sql
+    }
+
+    /** True when text follows a ";" outside string literals and quoted names: replaceAll(x, ',', ';') is one statement. */
+    private fun hasSecondStatement(sql: String, backslashEscapes: Boolean): Boolean {
+        var quote: Char? = null
+        var i = 0
+        while (i < sql.length) {
+            val c = sql[i]
+            when {
+                quote != null -> {
+                    if (backslashEscapes && c == '\\') i++
+                    else if (c == quote) quote = null
+                }
+                c == '\'' || c == '"' || c == '`' -> quote = c
+                c == ';' && sql.substring(i + 1).isNotBlank() -> return true
+            }
+            i++
+        }
+        return false
     }
 
     /** Removes -- and /* */ comments outside string literals. */
