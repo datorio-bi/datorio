@@ -302,6 +302,8 @@
   "designer.table_density.large": "Geniş",
   "designer.table_page_size_auto": "Otomatik (widget boyutu)",
   "designer.table_page_size_hint": "Otomatik ayarlama için boş bırakın",
+  "designer.table_null_text": "Boş değer metni",
+  "designer.table_null_text_hint": "Değeri olmayan (NULL) hücrede gösterilir; alan boş bırakılırsa hücre boş kalır",
   "designer.kpi_value_column": "Değer sütunu",
   "designer.kpi_aggregation": "Toplama",
   "designer.kpi_label_column": "Etiket sütunu",

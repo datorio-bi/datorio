@@ -302,6 +302,8 @@
   "designer.table_density.large": "Besar",
   "designer.table_page_size_auto": "Otomatis (ukuran widget)",
   "designer.table_page_size_hint": "Kosongkan untuk penyesuaian otomatis",
+  "designer.table_null_text": "Teks nilai kosong",
+  "designer.table_null_text_hint": "Ditampilkan di sel tanpa nilai (NULL); kosongkan kolom agar sel tetap kosong",
   "designer.kpi_value_column": "Kolom nilai",
   "designer.kpi_aggregation": "Agregasi",
   "designer.kpi_label_column": "Kolom label",

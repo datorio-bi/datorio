@@ -304,6 +304,8 @@
   "designer.table_density.large": "Grande",
   "designer.table_page_size_auto": "Auto (taille du widget)",
   "designer.table_page_size_hint": "Laisser vide pour ajustement automatique",
+  "designer.table_null_text": "Texte d'une valeur vide",
+  "designer.table_null_text_hint": "Affiché dans une cellule sans valeur (NULL) ; un champ vide laisse la cellule vide",
   "designer.kpi_value_column": "Colonne de valeur",
   "designer.kpi_aggregation": "Agrégation",
   "designer.kpi_label_column": "Colonne de libellé",

@@ -306,6 +306,8 @@
   "designer.table_density.large": "Velká",
   "designer.table_page_size_auto": "Auto (velikost widgetu)",
   "designer.table_page_size_hint": "Nechte prázdné pro automatické přizpůsobení",
+  "designer.table_null_text": "Text prázdné hodnoty",
+  "designer.table_null_text_hint": "Zobrazí se v buňce bez hodnoty (NULL); prázdné pole ponechá buňku prázdnou",
   "designer.kpi_value_column": "Sloupec hodnoty",
   "designer.kpi_aggregation": "Agregace",
   "designer.kpi_label_column": "Sloupec popisku",

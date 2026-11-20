@@ -304,6 +304,8 @@
   "designer.table_density.large": "Stor",
   "designer.table_page_size_auto": "Auto (widget-størrelse)",
   "designer.table_page_size_hint": "La stå tom for automatisk tilpasning",
+  "designer.table_null_text": "Tekst for tom verdi",
+  "designer.table_null_text_hint": "Vises i en celle uten verdi (NULL); et tomt felt lar cellen være tom",
   "designer.kpi_value_column": "Verdikolonne",
   "designer.kpi_aggregation": "Aggregering",
   "designer.kpi_label_column": "Etikettkolonne",

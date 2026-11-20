@@ -302,6 +302,8 @@
   "designer.table_density.large": "ใหญ่",
   "designer.table_page_size_auto": "อัตโนมัติ (ขนาดวิดเจ็ต)",
   "designer.table_page_size_hint": "เว้นว่างเพื่อปรับอัตโนมัติ",
+  "designer.table_null_text": "ข้อความของค่าว่าง",
+  "designer.table_null_text_hint": "แสดงในเซลล์ที่ไม่มีค่า (NULL) เว้นช่องนี้ว่างไว้เพื่อให้เซลล์ว่าง",
   "designer.kpi_value_column": "คอลัมน์ค่า",
   "designer.kpi_aggregation": "การรวม",
   "designer.kpi_label_column": "คอลัมน์ป้ายกำกับ",

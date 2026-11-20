@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { profileApi } from '@/api/admin';
+// The page has its own route (/profile/password): it loads the admin styles itself and sits inside .admin-page
+import './admin.css';
 
 const ChangePassword: React.FC = () => {
   const { t } = useTranslation();
@@ -40,6 +42,7 @@ const ChangePassword: React.FC = () => {
   };
 
   return (
+    <div className="admin-page">
     <div className="change-password">
       <h3>{t('auth.change_password')}</h3>
 
@@ -79,6 +82,7 @@ const ChangePassword: React.FC = () => {
           {loading ? t('auth.changing') : t('auth.change_password')}
         </button>
       </form>
+    </div>
     </div>
   );
 };

@@ -302,6 +302,8 @@
   "designer.table_density.large": "كبير",
   "designer.table_page_size_auto": "تلقائي (حجم الأداة)",
   "designer.table_page_size_hint": "اتركه فارغاً للتعديل التلقائي",
+  "designer.table_null_text": "نص القيمة الفارغة",
+  "designer.table_null_text_hint": "يظهر في خلية بلا قيمة (NULL)؛ اترك الحقل فارغًا لترك الخلية فارغة",
   "designer.kpi_value_column": "عمود القيمة",
   "designer.kpi_aggregation": "التجميع",
   "designer.kpi_label_column": "عمود التسمية",

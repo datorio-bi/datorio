@@ -304,6 +304,8 @@
   "designer.table_density.large": "Suuri",
   "designer.table_page_size_auto": "Auto (widgetin koko)",
   "designer.table_page_size_hint": "Jätä tyhjäksi automaattista sovitusta varten",
+  "designer.table_null_text": "Tyhjän arvon teksti",
+  "designer.table_null_text_hint": "Näytetään solussa, jossa ei ole arvoa (NULL); tyhjä kenttä jättää solun tyhjäksi",
   "designer.kpi_value_column": "Arvosarake",
   "designer.kpi_aggregation": "Kooste",
   "designer.kpi_label_column": "Otsikkosarake",

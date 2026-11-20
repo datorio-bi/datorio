@@ -306,6 +306,8 @@
   "designer.table_density.large": "Mare",
   "designer.table_page_size_auto": "Auto (dimensiune widget)",
   "designer.table_page_size_hint": "Lăsați gol pentru ajustare automată",
+  "designer.table_null_text": "Text pentru valoare goală",
+  "designer.table_null_text_hint": "Afișat într-o celulă fără valoare (NULL); un câmp gol lasă celula goală",
   "designer.kpi_value_column": "Coloana valorii",
   "designer.kpi_aggregation": "Agregare",
   "designer.kpi_label_column": "Coloana etichetei",

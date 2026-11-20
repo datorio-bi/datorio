@@ -184,8 +184,9 @@ function renderCellContent(
   fmt: ColumnFormatter | undefined,
   rawValue: unknown,
   nf: ColumnNumberFormat | undefined,
+  nullText: string,
 ): ReactNode {
-  if (rawValue == null) return <span className="text-slate-400">null</span>
+  if (rawValue == null) return nullText ? <span className="text-slate-400">{nullText}</span> : null
 
   if (fmt?.type === 'delta') {
     const num = Number(rawValue)
@@ -293,6 +294,8 @@ export default function TableWidget({ data, title, chartConfig, onRowClick, clic
     ? (config.tableDensity as Density)
     : 'default'
   const { rowHeight, textClass, cellPad, headerHeight } = DENSITY_CONFIG[density]
+  // Text of a cell without a value (chartConfig.nullText): "null" unless set, empty for a blank cell
+  const nullText = typeof config.nullText === 'string' ? config.nullText : 'null'
   const cols = data.columns || []
   const allRows = data.rows || []
 
@@ -501,7 +504,7 @@ export default function TableWidget({ data, title, chartConfig, onRowClick, clic
                         style={renderCellStyle(fmt, rawValue, columnMax[col], baseBg, rowBg)}
                         className={`${cellPad} whitespace-nowrap text-slate-700 dark:text-slate-300${numberFormats[col] ? ' text-end tabular-nums' : ''}`}
                       >
-                        {renderCellContent(fmt, rawValue, numberFormats[col])}
+                        {renderCellContent(fmt, rawValue, numberFormats[col], nullText)}
                       </td>
                     )
                   })}

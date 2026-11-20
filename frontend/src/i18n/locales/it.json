@@ -303,6 +303,8 @@
   "designer.table_density.large": "Grande",
   "designer.table_page_size_auto": "Auto (dimensione widget)",
   "designer.table_page_size_hint": "Lasciare vuoto per adattamento automatico",
+  "designer.table_null_text": "Testo del valore vuoto",
+  "designer.table_null_text_hint": "Mostrato in una cella senza valore (NULL); con il campo vuoto la cella resta vuota",
   "designer.kpi_value_column": "Colonna valore",
   "designer.kpi_aggregation": "Aggregazione",
   "designer.kpi_label_column": "Colonna etichetta",
