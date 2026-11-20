@@ -302,6 +302,8 @@
   "designer.table_density.large": "बड़ा",
   "designer.table_page_size_auto": "स्वचालित (विजेट आकार)",
   "designer.table_page_size_hint": "स्वचालित फिट के लिए खाली छोड़ें",
+  "designer.table_null_text": "खाली मान का पाठ",
+  "designer.table_null_text_hint": "बिना मान (NULL) वाले सेल में दिखाया जाता है; सेल खाली रखने के लिए फ़ील्ड खाली छोड़ें",
   "designer.kpi_value_column": "मान कॉलम",
   "designer.kpi_aggregation": "एकत्रीकरण",
   "designer.kpi_label_column": "लेबल कॉलम",

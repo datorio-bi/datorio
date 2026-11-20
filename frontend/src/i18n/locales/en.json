@@ -321,6 +321,8 @@
   "designer.table_density.large": "Large",
   "designer.table_page_size_auto": "Auto (fit to widget)",
   "designer.table_page_size_hint": "Leave empty for auto-fit based on widget height",
+  "designer.table_null_text": "Text for an empty value",
+  "designer.table_null_text_hint": "Shown in a cell without a value (NULL); leave the field empty to keep the cell blank",
   "designer.kpi_value_column": "Value Column",
   "designer.kpi_aggregation": "Aggregation",
   "designer.kpi_label_column": "Label Column",

@@ -302,6 +302,8 @@
   "designer.table_density.large": "여유롭게",
   "designer.table_page_size_auto": "자동 (위젯 크기)",
   "designer.table_page_size_hint": "자동 맞춤을 위해 비워두세요",
+  "designer.table_null_text": "빈 값 텍스트",
+  "designer.table_null_text_hint": "값이 없는(NULL) 셀에 표시됩니다. 비워 두면 셀이 빈칸으로 남습니다",
   "designer.kpi_value_column": "값 컬럼",
   "designer.kpi_aggregation": "집계 방식",
   "designer.kpi_label_column": "라벨 컬럼",

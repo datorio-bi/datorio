@@ -302,6 +302,8 @@
   "designer.table_density.large": "ゆったり",
   "designer.table_page_size_auto": "自動（ウィジェットサイズ）",
   "designer.table_page_size_hint": "自動調整する場合は空のままにしてください",
+  "designer.table_null_text": "空の値のテキスト",
+  "designer.table_null_text_hint": "値のない (NULL) セルに表示されます。空欄にするとセルは空のままです",
   "designer.kpi_value_column": "値カラム",
   "designer.kpi_aggregation": "集計方法",
   "designer.kpi_label_column": "ラベルカラム",

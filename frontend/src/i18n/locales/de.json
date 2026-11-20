@@ -303,6 +303,8 @@
   "designer.table_density.large": "Groß",
   "designer.table_page_size_auto": "Auto (Widget-Größe)",
   "designer.table_page_size_hint": "Leer lassen für automatische Anpassung",
+  "designer.table_null_text": "Text für leeren Wert",
+  "designer.table_null_text_hint": "Wird in einer Zelle ohne Wert (NULL) angezeigt; ein leeres Feld lässt die Zelle leer",
   "designer.kpi_value_column": "Wertspalte",
   "designer.kpi_aggregation": "Aggregation",
   "designer.kpi_label_column": "Beschriftungsspalte",

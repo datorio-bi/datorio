@@ -304,6 +304,8 @@
   "designer.table_density.large": "גדולה",
   "designer.table_page_size_auto": "אוטומטי (גודל הווידג'ט)",
   "designer.table_page_size_hint": "השאירו ריק להתאמה אוטומטית",
+  "designer.table_null_text": "טקסט לערך ריק",
+  "designer.table_null_text_hint": "מוצג בתא ללא ערך (NULL); שדה ריק משאיר את התא ריק",
   "designer.kpi_value_column": "עמודת ערך",
   "designer.kpi_aggregation": "צבירה",
   "designer.kpi_label_column": "עמודת תווית",

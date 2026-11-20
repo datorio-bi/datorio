@@ -146,6 +146,15 @@ export default function TableConfigOptions({ widget, cc, update, availableCols, 
         <p className="text-[10px] text-slate-400 mt-1">{t('designer.table_page_size_hint')}</p>
       </Field>
 
+      <Field label={t('designer.table_null_text')}>
+        <input
+          value={typeof cc.nullText === 'string' ? cc.nullText : 'null'}
+          onChange={e => update({ chartConfig: { ...cc, nullText: e.target.value } })}
+          className="input text-sm"
+        />
+        <p className="text-[10px] text-slate-400 mt-1">{t('designer.table_null_text_hint')}</p>
+      </Field>
+
       <Field label={t('designer.show_totals')}>
         <label className="flex items-center gap-2 cursor-pointer">
           <input

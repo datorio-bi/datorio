@@ -304,6 +304,8 @@
   "designer.table_density.large": "Grande",
   "designer.table_page_size_auto": "Auto (tamaño del widget)",
   "designer.table_page_size_hint": "Dejar vacío para ajuste automático",
+  "designer.table_null_text": "Texto de valor vacío",
+  "designer.table_null_text_hint": "Se muestra en una celda sin valor (NULL); con el campo vacío la celda queda en blanco",
   "designer.kpi_value_column": "Columna de valor",
   "designer.kpi_aggregation": "Agregación",
   "designer.kpi_label_column": "Columna de etiqueta",

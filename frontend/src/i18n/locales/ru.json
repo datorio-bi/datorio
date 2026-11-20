@@ -318,6 +318,8 @@
   "designer.table_density.large": "Крупная",
   "designer.table_page_size_auto": "Авто (по размеру виджета)",
   "designer.table_page_size_hint": "Оставьте пустым для автоподбора по высоте виджета",
+  "designer.table_null_text": "Текст пустого значения",
+  "designer.table_null_text_hint": "Показывается в ячейке без значения (NULL); если поле пустое, ячейка остаётся пустой",
   "designer.kpi_value_column": "Столбец значения",
   "designer.kpi_aggregation": "Агрегация",
   "designer.kpi_label_column": "Столбец подписи",

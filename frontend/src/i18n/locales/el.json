@@ -304,6 +304,8 @@
   "designer.table_density.large": "Μεγάλη",
   "designer.table_page_size_auto": "Αυτόματο (μέγεθος widget)",
   "designer.table_page_size_hint": "Αφήστε κενό για αυτόματη προσαρμογή",
+  "designer.table_null_text": "Κείμενο κενής τιμής",
+  "designer.table_null_text_hint": "Εμφανίζεται σε κελί χωρίς τιμή (NULL)· με κενό πεδίο το κελί μένει κενό",
   "designer.kpi_value_column": "Στήλη τιμής",
   "designer.kpi_aggregation": "Συνάθροιση",
   "designer.kpi_label_column": "Στήλη ετικέτας",

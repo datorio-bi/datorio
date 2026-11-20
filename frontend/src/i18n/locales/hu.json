@@ -302,6 +302,8 @@
   "designer.table_density.large": "Nagy",
   "designer.table_page_size_auto": "Automatikus (widget méret)",
   "designer.table_page_size_hint": "Hagyja üresen az automatikus illesztéshez",
+  "designer.table_null_text": "Üres érték szövege",
+  "designer.table_null_text_hint": "Az érték nélküli (NULL) cellában jelenik meg; üres mező esetén a cella üres marad",
   "designer.kpi_value_column": "Értékoszlop",
   "designer.kpi_aggregation": "Összesítés",
   "designer.kpi_label_column": "Címkeoszlop",

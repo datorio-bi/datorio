@@ -304,6 +304,8 @@
   "designer.table_density.large": "Groot",
   "designer.table_page_size_auto": "Auto (widgetgrootte)",
   "designer.table_page_size_hint": "Leeg laten voor automatische aanpassing",
+  "designer.table_null_text": "Tekst voor lege waarde",
+  "designer.table_null_text_hint": "Wordt getoond in een cel zonder waarde (NULL); laat het veld leeg voor een lege cel",
   "designer.kpi_value_column": "Waardekolom",
   "designer.kpi_aggregation": "Aggregatie",
   "designer.kpi_label_column": "Labelkolom",

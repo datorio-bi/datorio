@@ -304,6 +304,8 @@
   "designer.table_density.large": "Stor",
   "designer.table_page_size_auto": "Auto (widgetstorlek)",
   "designer.table_page_size_hint": "Lämna tomt för automatisk anpassning",
+  "designer.table_null_text": "Text för tomt värde",
+  "designer.table_null_text_hint": "Visas i en cell utan värde (NULL); ett tomt fält lämnar cellen tom",
   "designer.kpi_value_column": "Värdekolumn",
   "designer.kpi_aggregation": "Aggregering",
   "designer.kpi_label_column": "Etikettkolumn",

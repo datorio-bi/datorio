@@ -306,6 +306,8 @@
   "designer.table_density.large": "Duża",
   "designer.table_page_size_auto": "Auto (rozmiar widżetu)",
   "designer.table_page_size_hint": "Pozostaw puste dla automatycznego dopasowania",
+  "designer.table_null_text": "Tekst pustej wartości",
+  "designer.table_null_text_hint": "Wyświetlany w komórce bez wartości (NULL); puste pole pozostawia komórkę pustą",
   "designer.kpi_value_column": "Kolumna wartości",
   "designer.kpi_aggregation": "Agregacja",
   "designer.kpi_label_column": "Kolumna etykiety",

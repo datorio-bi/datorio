@@ -306,6 +306,8 @@
   "designer.table_density.large": "Велика",
   "designer.table_page_size_auto": "Авто (за розміром віджета)",
   "designer.table_page_size_hint": "Залиште порожнім для автопідбору",
+  "designer.table_null_text": "Текст порожнього значення",
+  "designer.table_null_text_hint": "Показується в клітинці без значення (NULL); якщо поле порожнє, клітинка лишається порожньою",
   "designer.kpi_value_column": "Стовпець значення",
   "designer.kpi_aggregation": "Агрегація",
   "designer.kpi_label_column": "Стовпець підпису",

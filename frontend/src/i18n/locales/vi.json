@@ -302,6 +302,8 @@
   "designer.table_density.large": "Lớn",
   "designer.table_page_size_auto": "Tự động (kích thước widget)",
   "designer.table_page_size_hint": "Để trống để tự động điều chỉnh theo chiều cao widget",
+  "designer.table_null_text": "Văn bản cho giá trị trống",
+  "designer.table_null_text_hint": "Hiển thị trong ô không có giá trị (NULL); để trống trường này để ô trống",
   "designer.kpi_value_column": "Cột giá trị",
   "designer.kpi_aggregation": "Phép tổng hợp",
   "designer.kpi_label_column": "Cột nhãn",
